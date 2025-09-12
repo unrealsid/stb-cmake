@@ -1,3 +1,7 @@
 *.o
 *.obj
 *.exe
+/build
+/out/build/x64-Debug
+/.vs
+/.idea/.idea.stb-cmake.dir/.idea
