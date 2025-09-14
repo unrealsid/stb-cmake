@@ -56,14 +56,15 @@ add_library(
 	${ALL_FILES}
 ) 
 
-#target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 target_include_directories(
     ${PROJECT_NAME} 
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
+
+message(STATUS "Current source files in soruce: ${ALL_FILES}")
 
 # 1. Install the target library
 install(
@@ -86,3 +87,5 @@ install(
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
+
+target_link_libraries(${PROJECT_NAME} PUBLIC ${ALL_FILES})
