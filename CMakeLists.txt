@@ -4,7 +4,7 @@ cmake_minimum_required(
 )
 
 project(
-	lib-stbimage
+	STB-image
 	LANGUAGES C
 )
 
@@ -63,4 +63,4 @@ target_include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-message(STATUS "Current source files in source: ${ALL_FILES}")
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
