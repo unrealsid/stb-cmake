@@ -57,4 +57,10 @@ add_library(
 	${ALL_FILES}
 )
 
+target_include_directories(
+    ${PROJECT_NAME} 
+    PUBLIC
+    ${ALL_FILES}
+)
+
 message(STATUS "Current source files in source: ${ALL_FILES}")
