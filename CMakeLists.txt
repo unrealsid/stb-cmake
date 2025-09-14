@@ -53,39 +53,8 @@ set(
 
 add_library(
     ${PROJECT_NAME} 
+    STATIC
 	${ALL_FILES}
-) 
-
-target_include_directories(
-    ${PROJECT_NAME} 
-    PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-
-message(STATUS "Current source files in soruce: ${ALL_FILES}")
-
-# 1. Install the target library
-install(
-    TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Config
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-# 2. Install headers
-install(
-    FILES ${Header_Files}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-# 3. Install CMake package config
-install(
-    EXPORT ${PROJECT_NAME}Config
-    NAMESPACE ${PROJECT_NAME}::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
-)
-
-target_link_libraries(${PROJECT_NAME} PUBLIC ${ALL_FILES})
+message(STATUS "Current source files in source: ${ALL_FILES}")
