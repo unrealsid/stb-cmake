@@ -60,7 +60,7 @@ add_library(
 target_include_directories(
     ${PROJECT_NAME} 
     PUBLIC
-    ${ALL_FILES}
+    "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
 message(STATUS "Current source files in source: ${ALL_FILES}")
