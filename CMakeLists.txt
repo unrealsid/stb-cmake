@@ -8,6 +8,8 @@ project(
 	LANGUAGES C
 )
 
+include(GNUInstallDirs)
+
 set(
     Header_Files
     stb_connected_components.h
@@ -49,14 +51,38 @@ set(
     ${Source_Files}
 )
 
-add_executable(
-    ${PROJECT_NAME}  ${ALL_FILES}
+add_library(
+    ${PROJECT_NAME} 
+	${ALL_FILES}
 ) 
 
 #target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_include_directories(${PROJECT_NAME} 
+target_include_directories(
+    ${PROJECT_NAME} 
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+
+# 1. Install the target library
+install(
+    TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Config
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+# 2. Install headers
+install(
+    FILES ${Header_Files}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+# 3. Install CMake package config
+install(
+    EXPORT ${PROJECT_NAME}Config
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
